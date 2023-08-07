@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box" onclick="handle()">1111</div>
+</body>
+<script>
+	//函数拷贝
+    const deepclone = (target, wm = new WeakMap()) => {
+    if (typeof target !== 'object' || target === null) {
+        return target
+    }
+    if (wm.has(target)) return wm.get(target)
+    const cloneTarget = Array.isArray(target) ? [] : {}
+    if (Array.isArray(cloneTarget)) {
+        for (let item in target) {
+            cloneTarget[item] = deepclone(target[item])
+        }
+    } else {
+        for (let prop of Object.getOwnPropertyNames(target)) {
+            cloneTarget[prop] = deepclone(target[prop])
+        }
+        for (let symprop of Object.getOwnPropertySymbols(target)) {
+            cloneTarget[symprop] = target[symprop]
+        }
+    }
+    return cloneTarget
+}
+    function Person(name){
+        this.name = name
+    }
+    // person.prototype.name = 'bbb'
+    Person.prototype.age = 16
+    const test = new Person('aaa')
+    const cl = deepclone([1,2,3])
+    console.log(cl)
+</script>
+</html>
