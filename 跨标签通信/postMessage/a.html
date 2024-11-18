@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button id="btn">打开页面</button>
+  <iframe src="http://127.0.0.1:5501/src/views/test2.html" frameborder="0" name="test"></iframe>
+  <script>
+    const frame = window.frames.test
+    console.log(frame)
+    const btn = document.querySelector('#btn')
+    btn.addEventListener('click', post, false)
+    function post(){
+      test.postMessage('message test', 'http://127.0.0.1:5501')
+    }
+  </script>
+</body>
+</html>

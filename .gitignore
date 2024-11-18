@@ -1,6 +1,6 @@
-test.js
-test.html
-test.jpg
+# test.js
+# test*.html
+# test.jpg
 #mini-vue
 #package.json
 node_modules

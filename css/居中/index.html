@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>元素水平垂直居中</title>
+  <style>
+    .container{
+      width: 300px;
+      height: 300px;
+      background-color: red;
+      margin-bottom: 20px;
+    }
+    .child{
+      width: 100px;
+      height: 100px;
+      background-color: green;
+    }
+
+    /* flex */
+    .flex{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    /* grid */
+    .grid{
+      display: grid;
+      align-items: center;
+      justify-items: center;
+    }
+    /* absolute */
+    .absolute{
+      position: absolute;
+    }
+    .absolute-child{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      translate: -50% -50%;
+    }
+  </style>
+</head>
+<body>
+  <div class="container flex">
+    <div class="child"></div>
+  </div>
+  <div class="container grid">
+    <div class="child"></div>
+  </div>
+  <div class="container absolute">
+    <div class="child absolute-child"></div>
+  </div>
+  <div class="container">
+    <div class="child"></div>
+  </div>
+  <div class="container">
+    <div class="child"></div>
+  </div>
+  <div class="container">
+    <div class="child"></div>
+  </div>
+  <div class="container">
+    <div class="child"></div>
+  </div>
+  <div class="container">
+    <div class="child"></div>
+  </div>
+</body>
+</html>

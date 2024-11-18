@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    const TYPE_DIRECTORY = "directory";
+    const TYPE_FILE = "file";
+    class Directory {
+  constructor(name, type) {
+    this.name = name;
+    this.children = [];
+    this.type = type;
+  }
+}
+    function filesListToObject(list) {
+  const menu = [];
+  for (let i = 0; i < list.length; i++) {
+    const arr = pathStringToArray(list[i]["webkitRelativePath"]);
+    // console.log("arr", arr);
+    let cur = menu;
+    let curName = arr.shift();
+    // console.log(curName)
+    let flag = false;
+    
+    while(arr.length>0){
+      for (let j = 0; j < cur.length; j++) {
+      if (cur[j].name === curName) {
+        cur = cur[j].children;
+        flag = true;
+        break;
+      }
+    }
+    if (!flag) {
+      cur.push(new Directory(curName, TYPE_DIRECTORY));
+      cur = cur.at(-1).children;
+    }
+    curName = arr.shift()
+    flag = false;
+    }
+    if (arr.length === 0) {
+      cur.push(new Directory(curName, TYPE_FILE));
+      continue;
+    }
+    // console.log("menu", menu);
+  }
+  return menu;
+}
+
+function pathStringToArray(path) {
+  return path.split("/").slice(1);
+}
+
+const list = [{webkitRelativePath:'app/js/index.js'}]
+console.log(filesListToObject(list))
+  </script>
+</body>
+</html>

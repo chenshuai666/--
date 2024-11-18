@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button class="btn">click</button>
+  <script type="module">
+    import {a} from './test.js'
+    const btn = document.querySelector('.btn')
+    // btn.addEventListener('click',()=>{
+    //   console.log(a)
+    // })
+    btn.onclick = ()=>{
+      console.log(a)
+    }
+  </script>
+  <script>
+    //this 面试题一
+    // let name = 'window'
+    // let person = {
+    //   name: 'person',
+    //   sayName: function(){
+    //     console.log(this.name)
+    //   }
+    // }
+
+    // function sayName(){
+    //   let sss = person.sayName
+    //   sss()
+    //   person.sayName();
+    //   (person.sayName)();
+    //   (b=person.sayName)();
+    // }
+
+    // sayName()
+
+    //this面试题二
+    // function Person(name){
+    //   this.name = name
+    //   this.foo2 = ()=>{
+    //     console.log(this.name)
+    //   }
+    // }
+    // Person.prototype.foo3 = ()=>{
+    //   console.log(this.name)
+    // }
+    // Person.prototype.foo4 = function(){
+    //   console.log(this.name)
+    // }
+
+    // const person1 = new Person('person1')
+    // person1.foo2()
+    // person1.foo3()
+    // person1.foo4()
+    // console.log(person1)
+  </script>
+  <script type="module">
+    console.log(import.meta)
+  </script>
+</body>
+</html>

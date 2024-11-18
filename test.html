@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .main{
+            display: flex;
+            height: 1000px;
+            flex-wrap: wrap;
+        }
+        .box1{
+            width: 100%;
+            background-color: red;
+            flex: 0;
+        }
+        .box2{
+            width: 100%;
+            background-color: green;
+            flex: 0;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        function add(e){
+            event.preventDefault()
+            console.log(test)
+            console.dir(event.target)
+            console.log(new FormData(e).get('name'))
+            return false
+        }
+    </script>
+    <!-- <div id="box" onclick="handle()">1111</div> -->
+    <form name="test" onsubmit="add(this)">
+        <input type="text" name="name">
+        <input type="date" name="opendate" id="">
+        <input type="submit" value="click" >
+    </form>
+    <button class="btn">click</button>
+    <button id="myButton">点击按钮</button>
+<ul id="myList">
+  <li>项目1</li>
+  <li>项目2</li>
+  <li>项目3</li>
+</ul>
+<div id="myContainer">
+  <button class="button">按钮</button>
+  <a href="#" class="link">链接</a>
+</div>
+
+<script>
+  // 事件处理示例
+  const button = document.getElementById('myButton');
+  button.addEventListener('click', function(event) {
+    console.log('按钮被点击');
+  });
+
+  // 事件代理示例
+  const list = document.getElementById('myList');
+  list.addEventListener('click', function(event) {
+    if (event.target.tagName === 'LI') {
+      console.log('项目被点击');
+    }
+  });
+
+  // 事件委托示例
+  const container = document.getElementById('myContainer');
+  container.addEventListener('click', function(event) {
+    if (event.target.classList.contains('button')) {
+      console.log('按钮被点击');
+    } else if (event.target.classList.contains('link')) {
+      console.log('链接被点击');
+    }
+  });
+</script>
+
+    <script>
+        const btn = document.querySelector('.btn')
+        const obj = {
+            a: 1,
+            b: 2
+        }
+        let prop = 'a'
+        btn.addEventListener('click',()=>{
+            console.log(document.cookie)
+        })
+        setTimeout(()=>{
+            prop = 'b'
+        })
+    </script>
+    <script>
+        // async function createImg(url){
+        //     const response = await fetch(url)
+        //     const myBlob = await response.blob()
+        //     const objectURL = URL.createObjectURL(myBlob)
+        //     const img = document.createElement('img')
+        //     img.src = objectURL
+        //     document.body.appendChild(img)
+        // }
+        // createImg('http://127.0.0.1:3000/')
+        // const buffer = new ArrayBuffer(8);
+        // console.log(buffer)
+        async function createImg(url){
+            const response = await fetch('http://127.0.0.1:3000/search',{
+                method: 'POST',
+                headers:{
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "imgurl": url
+                })
+            })
+            const {imgurl, articleTitle} = await response.json()
+            console.log(imgurl)
+            // const res = await response.json()
+            // console.log(res)
+            // let image = "data:image/png;base64," + btoa(new Uint8Array(imgurl.data).reduce((res, byte) => res + String.fromCharCode(byte), ''))
+
+            const dataView = new Uint8Array(imgurl.data)
+            console.log(dataView)
+            const myBlob = new Blob([dataView])
+            const myUrl = URL.createObjectURL(myBlob)
+            const img = document.createElement('img')
+            img.src = myUrl
+            document.body.appendChild(img)
+
+            // const img = document.createElement('img')
+            // img.src = "data:image/png;base64," + imgurl
+            // document.body.appendChild(img)
+
+            // const myblob = await response.blob()
+            // const imgurl = URL.createObjectURL(myblob)
+            // const img = document.createElement('img')
+            // img.src = imgurl
+            // document.body.appendChild(img)
+        }
+        createImg('https://mp.weixin.qq.com/s/8Sdv0DugI8u2r5KDKLYcEQ')
+        
+    </script>
+</body>
+<!-- <script>
+	//函数拷贝
+    const deepclone = (target, wm = new WeakMap()) => {
+    if (typeof target !== 'object' || target === null) {
+        return target
+    }
+    if (wm.has(target)) return wm.get(target)
+    const cloneTarget = Array.isArray(target) ? [] : {}
+    if (Array.isArray(cloneTarget)) {
+        for (let item in target) {
+            cloneTarget[item] = deepclone(target[item])
+        }
+    } else {
+        for (let prop of Object.getOwnPropertyNames(target)) {
+            cloneTarget[prop] = deepclone(target[prop])
+        }
+        for (let symprop of Object.getOwnPropertySymbols(target)) {
+            cloneTarget[symprop] = target[symprop]
+        }
+    }
+    return cloneTarget
+}
+    function Person(name){
+        this.name = name
+    }
+    // person.prototype.name = 'bbb'
+    Person.prototype.age = 16
+    const test = new Person('aaa')
+    const cl = deepclone([1,2,3])
+    console.log(cl)
+</script> -->
+</html>
